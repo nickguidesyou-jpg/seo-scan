@@ -82,6 +82,7 @@
             <h2 id="res-host"></h2>
             <p class="muted" id="res-meta"></p>
             <div class="counts" id="counts"></div>
+            <p class="potential" id="potential"></p>
           </div>
           <div class="summary-actions">
             <button type="button" class="btn ghost" id="btn-csv">Export CSV</button>
@@ -91,6 +92,19 @@
         </div>
 
         <div class="priorities" id="priorities"></div>
+
+        <div class="whatif" id="whatif" hidden>
+          <div class="whatif-head">
+            <div>
+              <h3>What if you fix…</h3>
+              <label for="whatif-range" id="whatif-label"></label>
+            </div>
+            <div class="whatif-score"><span id="whatif-from"></span><i aria-hidden="true">→</i><b id="whatif-to"></b><small id="whatif-gain"></small></div>
+          </div>
+          <input type="range" id="whatif-range" min="0" max="1" step="1">
+          <div class="whatif-bar" aria-hidden="true"><i id="whatif-new"></i><i id="whatif-now"></i></div>
+          <p class="muted whatif-note">This is your Scan300 SEO health score — how much of what we can measure is in good shape. It is not a prediction of rankings or traffic, which also depend on content, backlinks and competition.</p>
+        </div>
 
         <div class="tabs" role="tablist">
           <button role="tab" aria-selected="true" data-tab="checks">Checks &amp; fixes</button>

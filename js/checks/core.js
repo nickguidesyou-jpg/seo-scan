@@ -51,7 +51,22 @@ export function dupes(values) {
   return [...out];
 }
 
-const WEIGHT = { high: 3, medium: 2, low: 1 };
+export const WEIGHT = { high: 3, medium: 2, low: 1 };
+
+/** Failing checks ordered by impact (the order we tell people to fix them in). */
+export const byImpact = results => results.filter(r => r.status === 'fail').sort((a, b) => WEIGHT[b.sev] - WEIGHT[a.sev] || a.id - b.id);
+
+/** Score if the `n` highest-impact issues were fixed. */
+export function projectScore(results, n) {
+  const fixed = new Set(byImpact(results).slice(0, n).map(r => r.id));
+  let got = 0, max = 0;
+  results.forEach(r => {
+    if (r.status === 'na') return;
+    max += WEIGHT[r.sev];
+    if (r.status === 'pass' || fixed.has(r.id)) got += WEIGHT[r.sev];
+  });
+  return max ? Math.round(100 * got / max) : 0;
+}
 
 export function runChecks(scan) {
   const results = CHECKS.map(c => {

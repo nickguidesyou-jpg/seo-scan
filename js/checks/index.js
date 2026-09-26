@@ -4,4 +4,4 @@ import './links.js';
 import './tech.js';
 import './schema.js';
 
-export { CHECKS, runChecks } from './core.js';
+export { CHECKS, runChecks, projectScore, byImpact } from './core.js';

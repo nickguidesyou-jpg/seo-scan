@@ -1,5 +1,5 @@
 import { scan, normalizeInput } from './crawler.js';
-import { CHECKS, runChecks } from './checks/index.js';
+import { CHECKS, runChecks, projectScore, byImpact } from './checks/index.js';
 
 const $ = id => document.getElementById(id);
 const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
@@ -100,6 +100,11 @@ function renderResults() {
   ].map(([c, t]) => `<span class="count"><i style="background:${c}"></i>${t}</span>`).join('');
 
   const top = fails.filter(r => r.sev === 'high').concat(fails.filter(r => r.sev === 'medium')).slice(0, 6);
+  const topScore = projectScore(results, top.length);
+  $('potential').innerHTML = top.length && topScore > score
+    ? `Fixing the ${top.length} priority issue${top.length === 1 ? '' : 's'} below raises your score from <b>${score}</b> to <b>${topScore}</b>.`
+    : '';
+  renderWhatIf();
   $('priorities').innerHTML = top.length ? `<h3>Fix these first</h3><div class="prio-list">${top.map(r =>
     `<button type="button" class="prio" data-jump="${r.id}" style="border-left-color:var(--${r.sev === 'high' ? 'high' : 'med'})"><small>${esc(r.cat)}</small><strong>${esc(r.title)}</strong>${r.detail ? `<span>${esc(r.detail.length > 90 ? r.detail.slice(0, 90) + '…' : r.detail)}</span>` : ''}</button>`).join('')}</div>` : '';
 
@@ -109,6 +114,31 @@ function renderResults() {
   renderList();
   renderPages();
   $('results').scrollIntoView({ behavior: 'smooth' });
+}
+
+function renderWhatIf() {
+  const { results, score } = state;
+  const total = byImpact(results).length;
+  $('whatif').hidden = !total;
+  if (!total) return;
+  const slider = $('whatif-range');
+  slider.max = total;
+  slider.value = Math.round(total / 2);
+  updateWhatIf();
+}
+
+function updateWhatIf() {
+  const { results, score } = state;
+  const total = byImpact(results).length;
+  const n = +$('whatif-range').value;
+  const after = projectScore(results, n);
+  const pct = Math.round(100 * n / total);
+  $('whatif-label').textContent = `Fix ${n} of ${total} issues (${pct}%), highest impact first`;
+  $('whatif-from').textContent = score;
+  $('whatif-to').textContent = after;
+  $('whatif-gain').textContent = after > score ? `+${after - score} points` : 'no change';
+  $('whatif-now').style.width = score + '%';
+  $('whatif-new').style.width = after + '%';
 }
 
 function renderCats() {
@@ -202,6 +232,7 @@ $('results').addEventListener('click', e => {
   }
 });
 
+$('whatif-range').addEventListener('input', updateWhatIf);
 $('search').addEventListener('input', e => { state.q = e.target.value; renderList(); });
 $('btn-new').addEventListener('click', () => {
   $('results').hidden = true;
