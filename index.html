@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Scan300 – Free SEO Audit with 300 Checks</title>
+  <meta name="description" content="Paste your website and get a free SEO audit: we crawl up to 25 pages and run 300 technical, on-page and content checks, with a clear fix for every issue.">
+  <link rel="canonical" href="https://nickguidesyou-jpg.github.io/seo-scan/">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Scan300 – Free SEO Audit with 300 Checks">
+  <meta property="og:description" content="Paste your URL. Get 300 SEO checks and a fix for every issue. Free, no signup.">
+  <meta property="og:url" content="https://nickguidesyou-jpg.github.io/seo-scan/">
+  <meta property="og:site_name" content="Scan300">
+  <meta property="og:locale" content="en_US">
+  <meta name="twitter:card" content="summary">
+  <meta name="theme-color" content="#0b1a12">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%2322c55e'/%3E%3Ccircle cx='14' cy='14' r='7' fill='none' stroke='%230b1a12' stroke-width='3'/%3E%3Cpath d='M19 19l6 6' stroke='%230b1a12' stroke-width='3' stroke-linecap='round'/%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap">
+  <link rel="stylesheet" href="css/style.css">
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"WebApplication","name":"Scan300","url":"https://nickguidesyou-jpg.github.io/seo-scan/","applicationCategory":"SEO tool","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}
+  </script>
+  <script type="module" src="js/app.js"></script>
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+  <header class="nav">
+    <div class="wrap nav-in">
+      <a class="logo" href="./" aria-label="Scan300 home">
+        <svg viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="8" fill="currentColor"/><circle cx="14" cy="14" r="7" fill="none" stroke="var(--logo-ink)" stroke-width="3"/><path d="M19 19l6 6" stroke="var(--logo-ink)" stroke-width="3" stroke-linecap="round"/></svg>
+        Scan300
+      </a>
+      <nav aria-label="Main">
+        <a href="#checks">Checks</a>
+        <a href="#how">How it works</a>
+        <a href="#faq">FAQ</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="hero" id="top">
+      <div class="wrap">
+        <p class="eyebrow"><span class="dot"></span>Free SEO audit · no signup</p>
+        <h1>Find <em>300 ways</em> to make your website rank better.</h1>
+        <p class="lede">Paste your address. We crawl up to 25 pages, run 300 technical, on-page and content checks, and tell you exactly how to fix every issue.</p>
+
+        <form id="scan-form" class="scan-form" autocomplete="off">
+          <label for="url" class="sr">Website address</label>
+          <div class="field">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M3 12h18M12 3c2.5 2.7 3.8 5.7 3.8 9s-1.3 6.3-3.8 9c-2.5-2.7-3.8-5.7-3.8-9S9.5 5.7 12 3z" fill="none" stroke="currentColor" stroke-width="1.8"/></svg>
+            <input id="url" name="url" type="text" inputmode="url" placeholder="yourwebsite.com" spellcheck="false" autocapitalize="off" required>
+            <button type="submit" id="scan-btn">Scan site<span aria-hidden="true">→</span></button>
+          </div>
+          <p class="form-error" id="form-error" role="alert"></p>
+          <p class="try">Try: <button type="button" data-try="example.com">example.com</button><button type="button" data-try="wikipedia.org">wikipedia.org</button><button type="button" data-try="github.com">github.com</button></p>
+        </form>
+
+        <div class="progress" id="progress" hidden aria-live="polite">
+          <div class="progress-top"><strong id="progress-host"></strong><span id="progress-pct">0%</span></div>
+          <div class="bar"><i id="progress-bar"></i></div>
+          <ol id="progress-log"></ol>
+        </div>
+
+        <ul class="stats" aria-label="Key facts">
+          <li><b>300</b><span>checks</span></li>
+          <li><b>15</b><span>categories</span></li>
+          <li><b>25</b><span>pages crawled</span></li>
+          <li><b>~60s</b><span>per scan</span></li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="results" id="results" hidden>
+      <div class="wrap">
+        <div class="summary">
+          <div class="ring" id="score-ring"><svg viewBox="0 0 120 120" aria-hidden="true"><circle cx="60" cy="60" r="52" class="ring-bg"/><circle cx="60" cy="60" r="52" class="ring-fg" id="ring-fg"/></svg><div><b id="score">0</b><span>/100</span></div></div>
+          <div class="summary-main">
+            <p class="eyebrow">SEO report</p>
+            <h2 id="res-host"></h2>
+            <p class="muted" id="res-meta"></p>
+            <div class="counts" id="counts"></div>
+          </div>
+          <div class="summary-actions">
+            <button type="button" class="btn ghost" id="btn-csv">Export CSV</button>
+            <button type="button" class="btn ghost" id="btn-print">Print / PDF</button>
+            <button type="button" class="btn" id="btn-new">New scan</button>
+          </div>
+        </div>
+
+        <div class="priorities" id="priorities"></div>
+
+        <div class="tabs" role="tablist">
+          <button role="tab" aria-selected="true" data-tab="checks">Checks &amp; fixes</button>
+          <button role="tab" aria-selected="false" data-tab="pages">Crawled pages <span id="pages-count"></span></button>
+        </div>
+
+        <div id="tab-checks" class="layout">
+          <aside class="cats" id="cats" aria-label="Categories"></aside>
+          <div>
+            <div class="filters">
+              <div class="chips" id="status-chips"></div>
+              <input type="search" id="search" placeholder="Search checks…" aria-label="Search checks">
+            </div>
+            <div id="check-list" class="check-list"></div>
+          </div>
+        </div>
+
+        <div id="tab-pages" hidden>
+          <div class="table-wrap"><table class="pages-table" id="pages-table"></table></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="checks">
+      <div class="wrap">
+        <p class="eyebrow">What we check</p>
+        <h2>300 checks in 15 categories</h2>
+        <p class="lede small">From robots.txt to readability. Every failed check comes with a plain-language explanation of how to fix it.</p>
+        <div class="cat-grid" id="cat-grid"></div>
+      </div>
+    </section>
+
+    <section class="section alt" id="how">
+      <div class="wrap">
+        <p class="eyebrow">How it works</p>
+        <h2>Three steps, about a minute</h2>
+        <ol class="steps">
+          <li><b>1</b><h3>Paste your URL</h3><p>Any public website. No account, no email, no install.</p></li>
+          <li><b>2</b><h3>We crawl like Google</h3><p>We fetch your homepage, robots.txt, sitemap and up to 24 more pages, then test links, images, scripts and headers.</p></li>
+          <li><b>3</b><h3>Fix what matters</h3><p>Issues are ranked by impact. Each one tells you what is wrong, where, and how to fix it. Export to CSV or PDF.</p></li>
+        </ol>
+      </div>
+    </section>
+
+    <section class="section" id="faq">
+      <div class="wrap narrow">
+        <p class="eyebrow">FAQ</p>
+        <h2>Questions</h2>
+        <details><summary>Is it really free?</summary><p>Yes. No signup, no limits on the number of sites. It runs on free infrastructure, so please be patient if it is busy.</p></details>
+        <details><summary>How is this different from Screaming Frog?</summary><p>Screaming Frog is a powerful desktop crawler for SEO professionals. Scan300 is deliberately simpler: it runs in your browser, crawls a sample of up to 25 pages and turns the findings into a prioritised to-do list with fixes.</p></details>
+        <details><summary>Why did some checks say "not applicable"?</summary><p>Some checks only apply to certain sites — for example Product schema checks only run if you have products, and hreflang checks only if the site is multilingual. They do not affect your score.</p></details>
+        <details><summary>How is the score calculated?</summary><p>High-impact checks count 3 points, medium 2 and low 1. The score is the share of points you earn out of all checks that apply to your site.</p></details>
+        <details><summary>Do you store my data?</summary><p>No. The scan runs in your browser; pages are fetched through a small proxy that does not store anything. Nothing is saved after you close the tab.</p></details>
+        <details><summary>Can it measure Core Web Vitals?</summary><p>We check the things that cause slow pages (render-blocking scripts, image sizes, compression, caching, missing dimensions). For real-user Core Web Vitals, use Google PageSpeed Insights alongside this report.</p></details>
+      </div>
+    </section>
+  </main>
+
+  <footer class="foot">
+    <div class="wrap foot-in">
+      <span>Scan300 — a simple, free SEO crawler.</span>
+      <a href="#top">Back to top ↑</a>
+    </div>
+  </footer>
+</body>
+</html>
